@@ -1,1 +1,1 @@
-# python_training_2020
+# Репозиторий для курса по Python
