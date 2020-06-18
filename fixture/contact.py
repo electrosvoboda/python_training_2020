@@ -67,6 +67,22 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.return_home_page()
 
+    def modify_first_contact(self, contact):
+        wd = self.app.wd
+        # переход на экран списка контактов
+        wd.find_element_by_link_text("home").click()
+        # выбор первого контакта
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contact.firstname)
+        wd.find_element_by_name("nickname").click()
+        wd.find_element_by_name("nickname").clear()
+        wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        wd.find_element_by_name("update").click()
+        self.return_home_page()
+
     def return_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
