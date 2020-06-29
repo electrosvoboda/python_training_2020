@@ -51,7 +51,7 @@ class ContactHelper:
     def delete_first_contact(self):
         wd = self.app.wd
         # переход на экран списка контактов
-        wd.find_element_by_link_text("home").click()
+        self.home_page()
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
@@ -60,7 +60,7 @@ class ContactHelper:
     def modify_first_contact(self, new_info_contact):
         wd = self.app.wd
         # переход на экран списка контактов
-        wd.find_element_by_link_text("home").click()
+        self.home_page()
         self.select_first_contact()
         wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
         self.fill_contact_form(new_info_contact)
@@ -73,7 +73,8 @@ class ContactHelper:
 
     def home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not(len(wd.find_elements_by_name("home")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def count_con(self):
         wd = self.app.wd
