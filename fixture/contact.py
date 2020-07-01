@@ -1,6 +1,3 @@
-from selenium.webdriver.support.ui import Select
-
-
 class ContactHelper:
     def __init__(self, app):
         self.app = app
@@ -73,7 +70,7 @@ class ContactHelper:
 
     def home_page(self):
         wd = self.app.wd
-        if not(len(wd.find_elements_by_name("home")) > 0):
+        if not(len(wd.find_elements_by_name("home")) > 0 and wd.find_element_by_css_selector("div.left:nth-child(7) > input:nth-child(1)")):
             wd.find_element_by_link_text("home").click()
 
     def count_con(self):
