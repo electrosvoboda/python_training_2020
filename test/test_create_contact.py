@@ -9,7 +9,7 @@ def test_create_contact(app):
                                 workphone="+79883961245", fax="+79004523625", email="agrrhzerh@mail.ru",
                                 byear="1999")
     app.contact.create_contact(contact)
+    assert len(old_list_contact) + 1 == app.contact.count_con()
     new_contact = app.contact.get_contact_list()
-    assert len(old_list_contact) + 1 == len(new_contact)
     old_list_contact.append(contact)
     assert sorted(old_list_contact, key=Contact.id_or_max) == sorted(new_contact, key=Contact.id_or_max)
