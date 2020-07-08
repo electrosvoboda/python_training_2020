@@ -70,7 +70,8 @@ class ContactHelper:
         # переход на экран списка контактов
         self.home_page()
         self.select_contact_by_index(index)
-        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        for element in wd.find_elements_by_name("entry"):
+            element.find_elements_by_tag_name("td")[7].click()
         self.fill_contact_form(new_info_contact)
         wd.find_element_by_name("update").click()
         self.home_page()
