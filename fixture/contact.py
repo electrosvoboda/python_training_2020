@@ -70,8 +70,7 @@ class ContactHelper:
         # переход на экран списка контактов
         self.home_page()
         self.select_contact_by_index(index)
-        for element in wd.find_elements_by_name("entry"):
-            element.find_elements_by_tag_name("td")[7].click()
+        self.select_karandash(index)
         self.fill_contact_form(new_info_contact)
         wd.find_element_by_name("update").click()
         self.home_page()
@@ -80,6 +79,12 @@ class ContactHelper:
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_karandash(self, index):
+        wd = self.app.wd
+        element = wd.find_elements_by_name("entry")[index]
+        karand = element.find_elements_by_tag_name("td")[7]
+        karand.find_element_by_tag_name('a').click()
 
     def home_page(self):
         wd = self.app.wd
