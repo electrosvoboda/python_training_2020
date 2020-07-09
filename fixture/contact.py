@@ -1,4 +1,5 @@
 from model.contact import Contact
+import re
 
 
 class ContactHelper:
@@ -25,7 +26,6 @@ class ContactHelper:
         self.changes_contact_form("home", contact.homephone)
         self.changes_contact_form("mobile", contact.mobilephone)
         self.changes_contact_form("work", contact.workphone)
-        self.changes_contact_form("fax", contact.fax)
         # ввод электронной почты
         self.changes_contact_form("email", contact.email)
         # дата рождения
@@ -82,19 +82,28 @@ class ContactHelper:
 
     def select_karandash(self, index):
         wd = self.app.wd
+        self.home_page()
         element = wd.find_elements_by_name("entry")[index]
         karand = element.find_elements_by_tag_name("td")[7]
         karand.find_element_by_tag_name('a').click()
 
     def home_page(self):
         wd = self.app.wd
-        if not(len(wd.find_elements_by_name("home")) > 0 and wd.find_element_by_css_selector("div.left:nth-child(7) > input:nth-child(1)")):
+        if not (len(wd.find_elements_by_name("home")) > 0 and wd.find_element_by_css_selector(
+                "div.left:nth-child(7) > input:nth-child(1)")):
             wd.find_element_by_link_text("home").click()
 
     def count_con(self):
         wd = self.app.wd
         self.home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def open_contact_view_page_by_index(self, index):
+        wd = self.app.wd
+        self.home_page()
+        element = wd.find_elements_by_name("entry")[index]
+        figure = element.find_elements_by_tag_name("td")[6]
+        figure.find_element_by_tag_name('a').click()
 
     contact_cache = None
 
@@ -107,6 +116,31 @@ class ContactHelper:
                 cells = element.find_elements_by_tag_name("td")
                 lastname = cells[1].text
                 firstname = cells[2].text
-                id = cells[0].find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id))
+                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                all_phones = cells[5].text.splitlines()
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
+                                                  homephone=all_phones[0], workphone=all_phones[1],
+                                                  mobilephone=all_phones[2]))
         return list(self.contact_cache)
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.select_karandash(index)
+        firstname = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        homephone = wd.find_element_by_name("home").get_attribute("value")
+        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
+        fax = wd.find_element_by_name("fax").get_attribute("value")
+        return Contact(firstname=firstname, lastname=lastname, id=id,
+                       homephone=homephone, workphone=workphone, mobilephone=mobilephone)
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_contact_view_page_by_index(index)
+        text = wd.find_element_by_id("content").text
+        homephone = re.search("H: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
+        mobilephone = re.search("M: (.*)", text).group(1)
+        return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone)
