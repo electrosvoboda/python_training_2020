@@ -89,8 +89,8 @@ class ContactHelper:
 
     def home_page(self):
         wd = self.app.wd
-        if not (len(wd.find_elements_by_name("home")) > 0 and wd.find_element_by_css_selector(
-                "div.left:nth-child(7) > input:nth-child(1)")):
+        if not (len(wd.find_elements_by_name("home")) > 0 and
+                wd.find_element_by_css_selector("div.left:nth-child(7) > input:nth-child(1)")):
             wd.find_element_by_link_text("home").click()
 
     def count_con(self):
@@ -116,11 +116,11 @@ class ContactHelper:
                 cells = element.find_elements_by_tag_name("td")
                 lastname = cells[1].text
                 firstname = cells[2].text
+                address = cells[3].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-                all_phones = cells[5].text.splitlines()
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  homephone=all_phones[0], workphone=all_phones[1],
-                                                  mobilephone=all_phones[2]))
+                all_phones = cells[5].text
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id, address=address,
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def get_contact_info_from_edit_page(self, index):
@@ -132,7 +132,6 @@ class ContactHelper:
         homephone = wd.find_element_by_name("home").get_attribute("value")
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
-        fax = wd.find_element_by_name("fax").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id,
                        homephone=homephone, workphone=workphone, mobilephone=mobilephone)
 
@@ -143,4 +142,8 @@ class ContactHelper:
         homephone = re.search("H: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         mobilephone = re.search("M: (.*)", text).group(1)
-        return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone)
+        for element in wd.find_elements_by_id("content"):
+            info = element.find_elements_by_tag_name("br")
+            # firstlast = info[0].text
+            all_address = info[1].text
+            return Contact(address=all_address, homephone=homephone, workphone=workphone, mobilephone=mobilephone)
