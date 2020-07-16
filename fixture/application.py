@@ -2,7 +2,7 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
-driver = webdriver.Firefox('G:\\Program Files\\geckodriver')
+# driver = webdriver.Firefox('G:\\Program Files\\geckodriver')
 
 
 class Application:
