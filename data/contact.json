@@ -1,0 +1,74 @@
+[
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "",
+    "lastname": "",
+    "address": "",
+    "homephone": "",
+    "mobilephone": "",
+    "workphone": "",
+    "email": "",
+    "all_phones_from_home_page": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "firstnameza",
+    "lastname": "lastname{4x} ) g",
+    "address": "address6C3&?<",
+    "homephone": "homephonem h 1l",
+    "mobilephone": "mobilephonek",
+    "workphone": "workphonePs{7N m",
+    "email": "emailm_-od~",
+    "all_phones_from_home_page": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "firstname",
+    "lastname": "lastname$ ",
+    "address": "address;]",
+    "homephone": "homephonermof\\szJ",
+    "mobilephone": "mobilephonet8M0Cvm",
+    "workphone": "workphone0nX{<Q z",
+    "email": "emailP2 2*",
+    "all_phones_from_home_page": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "firstnameQ jDnHF2",
+    "lastname": "lastnamet%FR ",
+    "address": "address0F\"\\Y",
+    "homephone": "homephone#x",
+    "mobilephone": "mobilephoneNDHX*A|",
+    "workphone": "workphone",
+    "email": "email./NOW/",
+    "all_phones_from_home_page": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "firstname8neu",
+    "lastname": "lastname#iH!",
+    "address": "address  s<4>w",
+    "homephone": "homephone_8lyY]pK)",
+    "mobilephone": "mobilephones",
+    "workphone": "workphone1r`F@K9",
+    "email": "emailO mM",
+    "all_phones_from_home_page": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "id": null,
+    "firstname": "firstname",
+    "lastname": "lastnameQ Z((#$",
+    "address": "addressSVNbn B6",
+    "homephone": "homephoneq%y",
+    "mobilephone": "mobilephone",
+    "workphone": "workphone33L5^Vy",
+    "email": "email#>e2;cY",
+    "all_phones_from_home_page": null
+  }
+]

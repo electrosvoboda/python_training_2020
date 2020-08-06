@@ -18,9 +18,9 @@ class ContactHelper:
         # ввод данных клиента
         self.changes_contact_form("firstname", contact.firstname)
         self.changes_contact_form("lastname", contact.lastname)
-        self.changes_contact_form("nickname", contact.nickname)
+        # self.changes_contact_form("nickname", contact.nickname)
         # ввод места работы и адрес
-        self.changes_contact_form("company", contact.company)
+        # self.changes_contact_form("company", contact.company)
         self.changes_contact_form("address", contact.address)
         # ввод телефонов клиента
         self.changes_contact_form("home", contact.homephone)
@@ -37,7 +37,7 @@ class ContactHelper:
         # self.changes_contact_form("bmonth", contact.bmonth)
         # Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
         # wd.find_element_by_xpath("//option[@value='July']").click()
-        self.changes_contact_form("byear", contact.byear)
+        # self.changes_contact_form("byear", contact.byear)
 
     def create_contact(self, contact):
         wd = self.app.wd

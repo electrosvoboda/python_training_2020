@@ -1,6 +1,6 @@
 import random
 import string
-from model.group import Group
+from model.contact import Contact
 import os.path
 import jsonpickle
 import getopt
@@ -15,7 +15,7 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 n = 5
-f = "data/groups.json"
+f = "data/contact.json"
 
 
 for o, a in opts:
@@ -30,8 +30,12 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-testdata = [Group(name="", header="", footer="")] + [
-    Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
+testdata = [Contact(firstname="", lastname="", address="", homephone="", mobilephone="",
+                                workphone="", email="")] + [
+    Contact(firstname=random_string("firstname", 10), lastname=random_string("lastname", 10),
+            address=random_string("address", 10), homephone=random_string("homephone", 10),
+            mobilephone=random_string("mobilephone", 10), workphone=random_string("workphone", 10),
+            email=random_string("email", 10))
     for i in range(n)]
 
 
